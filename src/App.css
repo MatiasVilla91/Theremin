@@ -1,0 +1,38 @@
+.App {
+  text-align: center;
+  max-width: 800px;
+  margin:0 auto;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+
+.theremin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente */
+  justify-content: center; /* Centra verticalmente */
+  margin-top: 20px;
+}
+
+.theremin-area {
+  width: 400px;
+  height: 400px;
+  border: 2px solid #000;
+  
+}
+
+.controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
