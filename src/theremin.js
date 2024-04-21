@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react';
 
 function Theremin() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [frequency, setFrequency] = useState(0);
-  const [volume, setVolume] = useState(0);
-  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  const [frequency, setFrequency] = useState(440); // Frecuencia inicial
+  const [volume, setVolume] = useState(0.5); // Volumen inicial
+  let audioContext = null;
+  let oscillator = null;
+  let gainNode = null;
 
   const maxX = 400; // Ancho del área del cuadrado
   const maxY = 400; // Alto del área del cuadrado
 
   const calculateFrequency = (x, y) => {
     const minFrequency = 20; // Frecuencia mínima audible
-    const maxFrequency = 2000; // Frecuencia máxima audible
+    const maxFrequency = 1000; // Frecuencia máxima audible (reducida para ser audible)
     // Mapear la posición X del cursor al rango de frecuencia
     const frequencyX = (x / maxX) * (maxFrequency - minFrequency) + minFrequency;
     // Mapear la posición Y del cursor al rango de frecuencia
@@ -40,8 +42,9 @@ function Theremin() {
   };
 
   useEffect(() => {
-    let oscillator = null;
-    let gainNode = null;
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
 
     if (isPlaying) {
       oscillator = audioContext.createOscillator();
